@@ -9,20 +9,6 @@ If you want to learn more about Quarkus, please visit its website: <https://quar
 * Create, Read, Update, Delete (CRUD) of habits
 * Data validation with Hibernate Validator.
 
-## Endpoints
-
-```
-GET     /habits
-
-GET     /habits/{id}
-
-POST    /habits
-
-PUT     /habits/{id}
-
-DELETE  /habits/{id}
-```
-
 ## Technologies Used
 
 * **Quarkus:** A supersonic subatomic Java framework used for building fast and efficient applications.
@@ -32,6 +18,60 @@ DELETE  /habits/{id}
 * **Lombok:** Reduces boilerplate code.
 * **MapStruct:** For mapping between DTOs and entities.
 * **Hexagonal Architecture:** Used to achieve a clean separation between the business logic and the infrastructure.
+
+## Endpoints
+
+```
+POST    /login
+POST    /users
+
+GET     /habits
+GET     /habits/{id}
+POST    /habits
+PUT     /habits/{id}
+DELETE  /habits/{id}
+
+```
+
+#### Public Endpoints (No Authentication Required)
+
+The following endpoints are accessible without a JWT token:
+```
+POST /login – User authentication (returns the JWT).
+
+POST /users – Register a new user.
+
+GET /habits – Get all habits.
+
+GET /habits/{id} – Get a habit by ID.
+```
+#### Authentication Required (JWT)
+
+The following endpoints require a valid JWT with the user role:
+```
+POST /habits – Create a new habit.
+
+PUT /habits/{id} – Update an existing habit.
+```
+#### Admin Role Required
+
+This endpoint requires the JWT to include the admin role:
+```
+DELETE /habits/{id} – Delete a habit.
+```
+## JWT Key Setup
+
+To enable JWT authentication, create the following key files in your project:
+```
+src/main/resources/privateKey.pem
+src/main/resources/publicKey.pem
+```
+> **_NOTE:_**
+Make sure these files contain your RSA private and public keys, respectively, to properly sign and verify JWT tokens.
+
+## Generating RSA Keys
+
+For generating your .pem files, you can use OpenSSL or online tools for academic purposes, such as [CryptoTools RSA Key Generator](https://cryptotools.net/rsagen)
 
 ## Docker Compose Setup
 

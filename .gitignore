@@ -44,3 +44,4 @@ application.env.properties
 /.quarkus/cli/plugins/
 # TLS Certificates
 .certs/
+*.pem

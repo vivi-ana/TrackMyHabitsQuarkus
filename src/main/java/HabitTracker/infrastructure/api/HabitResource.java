@@ -5,6 +5,7 @@ import HabitTracker.domain.entity.Habit;
 import HabitTracker.infrastructure.api.dto.HabitRequestDTO;
 import HabitTracker.infrastructure.api.dto.HabitResponseDTO;
 import HabitTracker.infrastructure.database.mapper.HabitMapper;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -45,6 +46,7 @@ public class HabitResource {
     }
 
     @POST
+    @RolesAllowed("user")
     @Transactional
     public Response createHabit(@Valid HabitRequestDTO habitRequestDTO) {
         Habit habit = habitMapper.toDomain(habitRequestDTO);
@@ -53,6 +55,7 @@ public class HabitResource {
     }
 
     @PUT
+    @RolesAllowed("user")
     @Path("/{id}")
     @Transactional
     public Response updateHabit(@PathParam("id") Long id, @Valid HabitRequestDTO habitRequestDTO) {
@@ -67,6 +70,7 @@ public class HabitResource {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("admin")
     @Transactional
     public Response deleteHabit(@PathParam("id") Long id) {
         if (habitService.getById(id).isEmpty()) {
