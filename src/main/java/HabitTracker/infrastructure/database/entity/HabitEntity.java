@@ -15,6 +15,8 @@ public class HabitEntity {
     private Long id;
     private String name;
     private String description;
+
+    @Enumerated(EnumType.STRING)
     private Frequency frequency;
 
     @Column(name = "local_date")
